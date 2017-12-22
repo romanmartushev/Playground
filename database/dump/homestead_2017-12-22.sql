@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.5.5-10.2.8-MariaDB-10.2.8+maria~jessie)
 # Database: homestead
-# Generation Time: 2017-12-22 22:09:30 +0000
+# Generation Time: 2017-12-22 22:24:10 +0000
 # ************************************************************
 
 
@@ -40,7 +40,8 @@ LOCK TABLES `members` WRITE;
 
 INSERT INTO `members` (`name`, `age`, `birthday`, `phone_number`, `email`, `created_at`, `updated_at`)
 VALUES
-	('Roman Martushev','21','08/01/1996','2182805085','martushev8@gmail.com','2017-12-22 22:01:31','2017-12-22 22:01:31');
+	('Roman Martushev','21','08/01/1996','2182805085','martushev8@gmail.com','2017-12-22 22:01:31','2017-12-22 22:01:31'),
+	('Alia Martushev','20','11/03/1997','5034386036','aliamartushev@yahoo.com','2017-12-22 22:15:39','2017-12-22 22:15:39');
 
 /*!40000 ALTER TABLE `members` ENABLE KEYS */;
 UNLOCK TABLES;
