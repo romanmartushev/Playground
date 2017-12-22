@@ -10,7 +10,8 @@ gulp.task('default', function() {
 elixir(function(mix) {
     var bpath = 'node_modules/bootstrap-sass/assets';
     var jqueryPath = 'resources/assets/vendor/jquery';
-    mix.sass('app.scss')
+    mix.sass('app.scss', 'public_html/css');
+    mix.sass('main.scss','public_html/css')
         .copy(jqueryPath + '/dist/jquery.min.js', 'public_html/js')
         .copy(bpath + '/fonts', 'public_html/fonts')
         .copy(bpath + '/javascripts/bootstrap.min.js', 'public_html/js');
