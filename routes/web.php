@@ -14,4 +14,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::post('/','FamilyTree@createMember');
+
+Route::get('/family-tree',function(){
+   return view('welcome');
+});
+
+Route::get('/add-member', 'FamilyTree@startCreate');
+Route::post('/add-member','FamilyTree@createMember');
+
+Route::get('/update-member', 'FamilyTree@startUpdate');
+Route::post('/update-member','FamilyTree@updateMember');

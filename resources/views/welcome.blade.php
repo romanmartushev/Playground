@@ -13,44 +13,12 @@
         <h1>Welcome To My PlayGround!</h1>
         <div>Where Anything is Possible</div>
     </div>
-    <h2>Family Tree Project</h2>
-    <div class="col-md-6">
-        <div>Add A Family Member</div>
-        <form method="post">
-            {{ csrf_field() }}
-            <div class="form-group">
-                <label for="InputName">Name</label>
-                <input type="text" class="form-control" name="name" id="InputName" placeholder="Name">
-            </div>
-            <div class="form-group">
-                <label for="InputBirthday">Birthday</label>
-                <input type="text" class="form-control" name="birthday" id="InputBirthday" placeholder="Birthday">
-            </div>
-            <div class="form-group">
-                <label for="InputPhoneNumber">Phone Number</label>
-                <input type="text" class="form-control" name="phoneNumber" id="InputPhoneNumber" placeholder="Phone Number">
-            </div>
-            <div class="form-group">
-                <label for="InputEmail">Email address</label>
-                <input type="email" class="form-control" name="email" id="InputEmail" placeholder="Email">
-            </div>
-            <button type="submit" class="btn btn-default">Add Member</button>
-        </form>
-        @if (session('error'))
-            <div class="alert alert-danger">
-                <ul>
-                    <li>{{ session('error') }}</li>
-                </ul>
-            </div>
-        @endif
-        @if(session('success'))
-            <div class="alert alert-success">
-                <ul>
-                    <li>{{ session('success') }}</li>
-                </ul>
-            </div>
-        @endif
-    </div>
+    <h1>Family Tree Project</h1>
+    <ul>
+        <li><a href="/family-tree">View the Family Tree</a></li>
+    <li><a href="/add-member">Add A Family Member</a></li>
+    <li><a href="/update-member">Update A Family Member</a></li>
+    </ul>
     <script src="/js/jquery.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     </body>
