@@ -1,4 +1,7 @@
 @import "variables";
+body{
+  overflow-x: hidden;
+}
 .gradient{
   background: $gradient;
 }
@@ -7,4 +10,73 @@
 }
 .padding-xs{
   padding:5px;
+}
+.margin-top-lg{
+  margin-top: 20px;
+}
+.margin-bottom-lg{
+  margin-bottom: 20px;
+}
+.margin-left-auto{
+  margin-left: auto;
+}
+.margin-right-auto{
+  margin-right: auto;
+}
+.inline-block{
+  display: inline-block;
+}
+.border{
+  border-style: inset;
+}
+.rounded{
+  border-radius: 50%;
+}
+.circle{
+  width: 150px;
+  height:150px;
+}
+.center-block{
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+}
+.no-bullets{
+  list-style-type: none;
+  padding-left:0;
+}
+.circle-margin{
+  margin-top: 35px;
+}
+.special-bullets{
+  li {
+    display: block;
+  }
+
+  li:before {
+    /*Using a Bootstrap glyphicon as the bullet point*/
+    content: "\e080";
+    font-family: 'Glyphicons Halflings';
+    font-size: 9px;
+    float: left;
+    margin-top: 4px;
+    margin-left: -17px;
+    color: #CCCCCC;
+  }
+}
+.tree-roots{
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("/Images/tree-roots.jpg");
+  box-shadow: 8px 8px 10px #aaa;
+  background-repeat: no-repeat;
+  background-size: cover;
+  max-width: 1330px;
+  background-position: top;
+}
+.tree-1{
+  background-image:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/Images/tree-with-roots.jpg");
+  box-shadow: 8px 8px 10px #aaa;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: bottom;
+  max-width: 1330px;
 }

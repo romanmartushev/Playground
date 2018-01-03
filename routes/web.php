@@ -15,9 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/family-tree',function(){
-   return view('welcome');
-});
+Route::get('/family-tree','FamilyTree@viewTree');
 
 Route::get('/add-member', 'FamilyTree@startCreate');
 Route::post('/add-member','FamilyTree@createMember');

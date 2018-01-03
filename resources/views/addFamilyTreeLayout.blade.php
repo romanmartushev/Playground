@@ -8,26 +8,26 @@
     <link href="/css/app.css" rel="stylesheet">
     <link href="/css/main.css" rel="stylesheet">
 </head>
-    <body>
-        <h2>Family Tree Project</h2>
+<body>
+    <h2 class="text-center txt-white gradient padding-xs">Add Family Member</h2>
+    <div class="row tree-1 padding-xs margin-left-auto margin-right-auto">
         <div class="col-md-6">
-            <div>Add A Family Member</div>
             <form method="post">
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <label for="InputName">Name</label>
+                    <label class="txt-white" for="InputName">Name:</label>
                     <input type="text" class="form-control" name="name" id="InputName" placeholder="Name">
                 </div>
                 <div class="form-group">
-                    <label for="InputBirthday">Birthday</label>
+                    <label class="txt-white" for="InputBirthday">Birthday:</label>
                     <input type="text" class="form-control" name="birthday" id="InputBirthday" placeholder="Birthday">
                 </div>
                 <div class="form-group">
-                    <label for="InputPhoneNumber">Phone Number</label>
+                    <label class="txt-white" for="InputPhoneNumber">Phone Number:</label>
                     <input type="text" class="form-control" name="phoneNumber" id="InputPhoneNumber" placeholder="Phone Number">
                 </div>
                 <div class="form-group">
-                    <label for="InputEmail">Email address</label>
+                    <label class="txt-white" for="InputEmail">Email address:</label>
                     <input type="email" class="form-control" name="email" id="InputEmail" placeholder="Email">
                 </div>
                 <button type="submit" class="btn btn-default">Add Member</button>
@@ -47,7 +47,9 @@
                 </div>
             @endif
         </div>
-    <script src="/js/jquery.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    </body>
+    </div>
+    @include('partials/footer/familyTreeFooter')
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+</body>
 </html>
