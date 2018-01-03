@@ -1,4 +1,4 @@
-<div class="tree-roots margin-top-lg margin-left-auto margin-right-auto margin-bottom-lg">
+<div class="tree-roots container margin-top-lg margin-bottom-lg">
     <div class="row">
         <div class="col-md-6 txt-white">
             <div class="padding-xs">
