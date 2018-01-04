@@ -9,8 +9,12 @@
     <link href="/css/main.css" rel="stylesheet">
 </head>
 <body>
-<h2 class="text-center txt-white gradient padding-xs">Family Tree</h2>
-<div class=" container tree-1">
+<div class="container tree-1 margin-top-lg">
+    <div class="row padding-xs">
+        <div id="mainHeading" class="txt-white margin-left-auto margin-right-auto text-center">
+            <h1 class="underline shadow">Family Tree</h1>
+        </div>
+    </div>
     @yield('Members')
 </div>
     @if (session('error'))

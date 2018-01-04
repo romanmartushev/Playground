@@ -15,5 +15,7 @@ elixir(function(mix) {
         .copy(jqueryPath + '/dist/jquery.min.js', 'public_html/js')
         .copy(bpath + '/fonts', 'public_html/fonts')
         .copy(bpath + '/javascripts/bootstrap.min.js', 'public_html/js')
-        .copy('resources/assets/js/homepage.js', 'public_html/js');
+        .copy('resources/assets/js/homepage.js', 'public_html/js')
+        .copy('resources/assets/js/addMember.js', 'public_html/js')
+        .copy('resources/assets/js/updateMember.js', 'public_html/js');
 });

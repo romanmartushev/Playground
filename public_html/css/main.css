@@ -126,4 +126,12 @@ body {
   background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("/Images/jquery.png");
 }
 
+.underline {
+  text-decoration: underline;
+}
+
+.shadow {
+  text-shadow: 2px 2px 4px #000;
+}
+
 /*# sourceMappingURL=main.css.map */

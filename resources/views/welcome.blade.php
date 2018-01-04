@@ -12,10 +12,7 @@
     <div class="container">
         <div class="row margin-top-lg relative">
             <div id="mainHeading" class="txt-white absolute margin-left-auto margin-right-auto text-center">
-                <h1>The Family Tree Project</h1>
-            </div>
-            <div class="absolute margin-left-auto margin-right-auto text-center" style="bottom:0;">
-                <img id="animated-dog" src="http://www.animatedimages.org/data/media/202/animated-dog-image-0165.gif" border="0" alt="animated-bird-image-0086"/>
+                <h1 class="underline shadow">The Family Tree Project</h1>
             </div>
             <img id="treeImg" class="img-responsive" src="/Images/tree-with-roots.jpg">
         </div>

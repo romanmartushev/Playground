@@ -18,7 +18,7 @@ Route::get('/', function () {
 Route::get('/family-tree','FamilyTree@viewTree');
 
 Route::get('/add-member', 'FamilyTree@startCreate');
-Route::post('/add-member','FamilyTree@createMember');
+Route::get('/add-new-member','FamilyTree@createMember');
 
 Route::get('/update-member', 'FamilyTree@startUpdate');
-Route::post('/update-member','FamilyTree@updateMember');
+Route::get('/update-a-member','FamilyTree@updateMember');
