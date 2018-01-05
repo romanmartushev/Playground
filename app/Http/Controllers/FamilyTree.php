@@ -31,7 +31,7 @@ class FamilyTree extends Controller
             $day = date('d');
             $now = $month."/".$day;
             if($now == $check){
-                $this->sendMessage($member);
+                //$this->sendMessage($member);
             }
         }
         $families = array_values($families);
@@ -228,5 +228,30 @@ class FamilyTree extends Controller
             }
         }
         return $response = ['error' => 'A Family Member Must Be Entered!'];
+    }
+
+    public function getBirthdays(){
+        $members = Member::all();
+        $birthdays =[];
+        foreach ($members as $member){
+            $check = substr($member->birthday,0, -5);
+            $age = $this->getAge($member);
+            $member->age = $age;
+            $member->save();
+            $month = date('m');
+            $day = date('d');
+            $now = $month."/".$day;
+            if($now == $check){
+                array_push($birthdays,$member->toArray());
+            }
+        }
+        return $birthdays;
+    }
+
+    public function getAge($member){
+        $date = new \DateTime($member->birthday);
+        $now = new \DateTime();
+        $age = $now->diff($date);
+        return $age->y;
     }
 }

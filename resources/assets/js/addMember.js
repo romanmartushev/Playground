@@ -21,7 +21,6 @@ new Vue({
                     email: $("#InputEmail").val()
                 },
                 success: function(data){
-                    console.log(data);
                     if(data["success"]){
                         $("#InputName").val('');
                         $("#InputBirthday").val('');

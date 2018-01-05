@@ -38,20 +38,20 @@ class Kernel extends ConsoleKernel
 //            }
 //        })->daily();
     }
-//    public function sendMessage($person){
-//        $basic  = new \Nexmo\Client\Credentials\Basic(env("Nexmo_API_KEY"), env("Nexmo_API_SECRET"));
-//        $client = new \Nexmo\Client($basic);
-//
-//        $date = new \DateTime($person->birthday);
-//        $now = new \DateTime();
-//        $age = $now->diff($date);
-//
-//        $message = $client->message()->send([
-//            'to' => "12182805085",
-//            'from' => '12109619101',
-//            'text' => 'It is '.$person->name.'\'s birthday! He is Turning '.$age->y.'! Wish Him a Happy Birthday his phone number is: '.$person->phone_number
-//        ]);
-//    }
+    public function sendMessage($person){
+        $basic  = new \Nexmo\Client\Credentials\Basic(env("Nexmo_API_KEY"), env("Nexmo_API_SECRET"));
+        $client = new \Nexmo\Client($basic);
+
+        $date = new \DateTime($person->birthday);
+        $now = new \DateTime();
+        $age = $now->diff($date);
+
+        $message = $client->message()->send([
+            'to' => "12182805085",
+            'from' => '12109619101',
+            'text' => 'It is '.$person->name.'\'s birthday! He is Turning '.$age->y.'! Wish Him a Happy Birthday his phone number is: '.$person->phone_number
+        ]);
+    }
     /**
      * Register the commands for the application.
      *
