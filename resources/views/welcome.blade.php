@@ -9,13 +9,13 @@
         <link href="/css/main.css" rel="stylesheet">
     </head>
     <body>
-    <div class="container" id="root">
+    <div class="container box-shadow" id="root">
         <div class="row margin-top-lg relative">
             <div id="mainHeading" class="txt-white absolute margin-left-auto margin-right-auto text-center">
                 <h1 class="underline shadow">The Family Tree Project</h1>
             </div>
             <img id="treeImg" class="img-responsive" src="/Images/tree-with-roots.jpg">
-            <div class="absolute" v-if="response != ''" style="bottom:0;">
+            <div class="absolute" v-if="response !==''" style="bottom:0;">
                 <ul class="txt-white special-bullets">
                     <li v-for="member in response" class="shadow">@{{member['name']}} turned @{{member['age']}} today!</li>
                 </ul>

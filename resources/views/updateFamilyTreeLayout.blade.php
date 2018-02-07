@@ -31,13 +31,13 @@
                 <input type="email" class="form-control" name="email" id="InputEmail" placeholder="Email">
             </div>
             <button class="btn btn-default" v-on:click="updateMember">Update Member</button>
-            <div class="alert alert-success" v-if="success != ''">
+            <div class="alert alert-success" v-if="success">
                 <ul>
                     <li>@{{success}}</li>
                 </ul>
             </div>
             <div>
-                <div class="alert alert-danger" v-if="error != ''">
+                <div class="alert alert-danger" v-if="error">
                     <ul>
                         <li>@{{error}}</li>
                     </ul>

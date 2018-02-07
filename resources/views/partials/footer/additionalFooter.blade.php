@@ -1,4 +1,4 @@
-<div class="code-background container margin-bottom-lg">
+<div class="code-background container margin-bottom-lg box-shadow">
     <div class="row">
         <div class="col-md-6 txt-white">
             <div class="padding-xs">
