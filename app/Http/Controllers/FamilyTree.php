@@ -24,32 +24,8 @@ class FamilyTree extends Controller
                 unset($families[$index]);
             }
         }
-        $members = Member::all();
-        foreach ($members as $member){
-            $check = substr($member->birthday,0, -5);
-            $month = date('m');
-            $day = date('d');
-            $now = $month."/".$day;
-            if($now == $check){
-                //$this->sendMessage($member);
-            }
-        }
         $families = array_values($families);
         return view('mainFamilyTree')->with('families',$families);
-    }
-    public function sendMessage($person){
-        $basic  = new \Nexmo\Client\Credentials\Basic(env("Nexmo_API_KEY"), env("Nexmo_API_SECRET"));
-        $client = new \Nexmo\Client($basic);
-
-        $date = new \DateTime($person->birthday);
-        $now = new \DateTime();
-        $age = $now->diff($date);
-
-        $message = $client->message()->send([
-            'to' => "12182805085",
-            'from' => '12109619101',
-            'text' => 'It is '.$person->name.'\'s birthday! They have turned '.$age->y.'!'
-        ]);
     }
 
     protected function Spouses(){
