@@ -30,6 +30,8 @@ Route::get('/api/sendText','NexmoAPIController@sendText');
 
 Route::get('/api/getText','NexmoAPIController@getText');
 
+Route::get('/api/deleteText','NexmoAPIController@deleteText');
+
 Route::any('/webhooks/inbound-sms', function(){
     $message = \Nexmo\Message\InboundMessage::createFromGlobals();
     if($message->isValid()){
