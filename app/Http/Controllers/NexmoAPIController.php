@@ -22,7 +22,7 @@ class NexmoAPIController extends Controller
         if($request->has('message') && $request->has('number')) {
             if ($request->has('secret') && $request->input('secret') == env("Nexmo_API_SECRET")) {
                 if ($request->has("key") && $request->input("key") == env("Nexmo_API_KEY")) {
-                    //http://myfamily.pbndev.net//api/sendText?message=hello&number=12182805085&key=$key&secret=$secret
+                    //http://myfamily.pbndev.net/api/sendText?message=hello&number=12182805085&key=$key&secret=$secret
                     $message = $request->input('message');
                     $number = $request->input('number');
                     $basic  = new Basic(env("Nexmo_API_KEY"), env("Nexmo_API_SECRET"));
