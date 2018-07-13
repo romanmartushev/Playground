@@ -70,7 +70,7 @@ class checkBirthdays extends Command
      * @throws \Nexmo\Client\Exception\Server
      */
     public function sendMessage($message){
-        $numbers = ["12182805085","15034386036","14063811446","2182807450"];
+        $numbers = ["12182805085","15034386036","14063811446","12182807450","16125996516"];
         $basic  = new Basic(env("Nexmo_API_KEY"), env("Nexmo_API_SECRET"));
         $client = new Client($basic);
         foreach($numbers as $number) {

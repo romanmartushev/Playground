@@ -16,6 +16,10 @@ use Illuminate\Support\Facades\Cache;
 Route::get('/', function () {
     return view('welcome');
 });
+
+/**
+ * Routes for family tree project
+ */
 Route::get('/homepage-birthdays','FamilyTree@getBirthdays');
 
 Route::get('/family-tree','FamilyTree@viewTree');
@@ -26,6 +30,9 @@ Route::get('/add-new-member','FamilyTree@createMember');
 Route::get('/update-member', 'FamilyTree@startUpdate');
 Route::get('/update-a-member','FamilyTree@updateMember');
 
+/**
+ * Routes for text message app (windows app)
+ */
 Route::get('/api/sendText','NexmoAPIController@sendText');
 
 Route::get('/api/getText','NexmoAPIController@getText');
@@ -55,3 +62,8 @@ Route::any('/webhooks/inbound-sms', function(){
     }
     return 200;
 });
+
+/**
+ * Routes for messaging app
+ */
+Route::get('/chat', 'ChatController@index');
