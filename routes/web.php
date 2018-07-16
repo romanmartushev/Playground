@@ -67,3 +67,5 @@ Route::any('/webhooks/inbound-sms', function(){
  * Routes for messaging app
  */
 Route::get('/chat', 'ChatController@index');
+Route::get('/chat/new', 'ChatController@newMessages');
+Route::get('/chat/add', 'ChatController@addMessage');

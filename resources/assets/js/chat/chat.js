@@ -19,10 +19,14 @@ const app = new Vue({
     data:{
         success: '',
         error:'',
-        chat: [ { message: 'Welcome to the Chat!!', user: 'default', time: new Date().toLocaleTimeString('en-US', {hour: 'numeric', minute: '2-digit'})} ],
+        chat: [ { message: 'Welcome to the Chat!!', user: 'default', image: 'https://placehold.it/50/55C1E7/fff&text=D', time: new Date().toLocaleTimeString('en-US', {hour: 'numeric', minute: '2-digit'})} ],
         text: '',
         showModal: true,
-        user: ''
+        user: '',
+        user_image: '',
+        errors: [],
+        allMessages: [],
+        messageCounter: 0
     },
     watch: {
         'chat': function () {
@@ -33,13 +37,48 @@ const app = new Vue({
     },
     methods: {
         addMessage: function () {
-            var time = new Date();
-            this.chat.push({message: this.text, user: this.user, time: time.toLocaleTimeString('en-US', {hour: 'numeric', minute: '2-digit'})});
+            var time = new Date().toLocaleTimeString('en-US', {hour: 'numeric', minute: '2-digit'});
+            var message = {message: this.text, user: this.user, image: this.user_image, time: time};
+            this.chat.push(message);
+            axios.get("/chat/add?message="+this.text+"&user="+this.user+"&image="+this.user_image+"&time="+time)
+                .then(function (response) {
+                    console.log(response.data['success']);
+                }).catch(function(e) {
+                vm.errors.push(e);
+            });
             this.text = '';
+        },
+        checkNewMessages: function () {
+            const vm = this;
+            axios.get("/chat/new")
+                .then(function (response) {
+                    if(response.data.length === 0){
+                        vm.messageCounter = response.data.length;
+                    }else{
+                        for(var i = vm.messageCounter; i < response.data.length; i++){
+                            if( vm.user !== response.data[i].user){
+                                vm.chat.push(response.data[i]);
+                            }
+                        }
+                        vm.messageCounter = response.data.length;
+                    }
+                }).catch(function(e) {
+                    vm.errors.push(e);
+            });
         }
+    },
+    mounted: function(){
+        this.checkNewMessages();
     }
 });
 
 function addName(username){
     app.user = username;
-};
+    app.user_image = "https://placehold.it/50/55C1E7/fff&text=" + username.charAt(0).toUpperCase();
+}
+
+setInterval(function(){
+    if(app.user !== ''){
+        app.checkNewMessages();
+    }
+},5000);

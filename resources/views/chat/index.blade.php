@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Chat</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">    <link href="/css/app.css" rel="stylesheet">
     <link href="/css/main.css" rel="stylesheet">
@@ -24,7 +25,7 @@
                         <ul class="chat" v-chat-scroll>
                             <li class="left clearfix padding-xs" v-for="message in chat">
                                 <span class="chat-img pull-left">
-                                    <img src="https://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" />
+                                    <img class="img-circle" :src=message.image />
                                 </span>
                                 <div class="chat-body clearfix" style="overflow-wrap: break-word;">
                                     <div class="header">
@@ -69,6 +70,7 @@
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/vue.js"></script>
+<script src="/js/axios.js"></script>
 <script src="/js/vue-chat-scroll.js"></script>
 <script src="/js/chat/chat.js"></script>
 </body>
