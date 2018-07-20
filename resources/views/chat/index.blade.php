@@ -66,7 +66,7 @@
         </ul>
     </div>
 @endif
-@include('partials/footer/familyTreeFooter')
+@include('partials/footer/additionalFooter')
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/vue.js"></script>
