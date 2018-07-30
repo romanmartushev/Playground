@@ -34,7 +34,7 @@ new Vue({
                 .then(function (response) {
                     vm.birthdays = response.data;
                 }).catch(function(e) {
-                vm.errors.push(e);
+                    vm.errors.push(e);
             });
         }
     },
