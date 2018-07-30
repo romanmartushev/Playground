@@ -16,7 +16,12 @@ use Illuminate\Support\Facades\Cache;
 Route::get('/', function () {
     return view('welcome');
 });
-
+/**
+ * Routes for the dark theme
+ */
+Route::get('/dark', function () {
+    return view('dark/index');
+});
 /**
  * Routes for family tree project
  */
@@ -69,3 +74,16 @@ Route::any('/webhooks/inbound-sms', function(){
 Route::get('/chat', 'ChatController@index');
 Route::get('/chat/new', 'ChatController@newMessages');
 Route::get('/chat/add', 'ChatController@addMessage');
+/**
+ * Routes for form builder
+ */
+Route::get('/form-builder', function () {
+    $file = File::get(resource_path() . '/views/form-builder/form-builder.html');
+    $file = str_replace("../assets/css/style.css", "/css/form-builder/style.css", $file);
+    $file = str_replace("../assets/js/form-builder.js", "/js/form-builder/form-builder.js", $file);
+    return $file;
+});
+
+Route::post('/app/api/shortcode', function () {
+    require_once dirname(__DIR__) . '/resources/assets/form-builder/shortcode.php';
+});

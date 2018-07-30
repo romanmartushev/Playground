@@ -1,0 +1,125 @@
+.txt-center, .text-center {
+    text-align: center;
+}
+.txt-right, .text-right {
+    text-align: right;
+}
+.txt-left, .text-left {
+    text-align: left;
+}
+.txt-size-xs {
+    font-size: 18px;
+    font-size: 1.125rem; }
+@media (min-width: 992px) and (max-width: 1199px) {
+    .txt-size-xs {
+        font-size: 18px;
+        font-size: 1.125rem; } }
+@media (min-width: 768px) and (max-width: 991px) {
+    .txt-size-xs {
+        font-size: 15.75px;
+        font-size: 0.98438rem; } }
+@media (max-width: 767px) {
+    .txt-size-xs {
+        font-size: 14.625px;
+        font-size: 0.91406rem; } }
+
+.txt-size-sm {
+    font-size: 25px;
+    font-size: 1.5625rem; }
+@media (min-width: 992px) and (max-width: 1199px) {
+    .txt-size-sm {
+        font-size: 25px;
+        font-size: 1.5625rem; } }
+@media (min-width: 768px) and (max-width: 991px) {
+    .txt-size-sm {
+        font-size: 21.875px;
+        font-size: 1.36719rem; } }
+@media (max-width: 767px) {
+    .txt-size-sm {
+        font-size: 20.3125px;
+        font-size: 1.26953rem; } }
+
+.txt-size-md {
+    font-size: 32px;
+    font-size: 2rem; }
+@media (min-width: 992px) and (max-width: 1199px) {
+    .txt-size-md {
+        font-size: 32px;
+        font-size: 2rem; } }
+@media (min-width: 768px) and (max-width: 991px) {
+    .txt-size-md {
+        font-size: 28px;
+        font-size: 1.75rem; } }
+@media (max-width: 767px) {
+    .txt-size-md {
+        font-size: 26px;
+        font-size: 1.625rem; } }
+
+.txt-size-lg {
+    font-size: 49px;
+    font-size: 3.0625rem; }
+@media (min-width: 992px) and (max-width: 1199px) {
+    .txt-size-lg {
+        font-size: 49px;
+        font-size: 3.0625rem; } }
+@media (min-width: 768px) and (max-width: 991px) {
+    .txt-size-lg {
+        font-size: 42.875px;
+        font-size: 2.67969rem; } }
+@media (max-width: 767px) {
+    .txt-size-lg {
+        font-size: 39.8125px;
+        font-size: 2.48828rem; } }
+
+.txt-size-hu {
+    font-size: 66px;
+    font-size: 4.125rem; }
+@media (min-width: 992px) and (max-width: 1199px) {
+    .txt-size-hu {
+        font-size: 66px;
+        font-size: 4.125rem; } }
+@media (min-width: 768px) and (max-width: 991px) {
+    .txt-size-hu {
+        font-size: 57.75px;
+        font-size: 3.60938rem; } }
+@media (max-width: 767px) {
+    .txt-size-hu {
+        font-size: 53.625px;
+        font-size: 3.35156rem; } }
+
+
+/**
+ * Plain divider, makes a horizontal solid line the same size as the to navigation borders
+ * Usage:
+ * <hr class="divider" />
+ */
+.divider {
+    border-top: 7px solid #F2F3F3;
+    margin-top: 52px;
+    margin-top: 3.25rem;
+    margin-bottom: 52px;
+    margin-bottom: 3.25rem; }
+/**
+ * Slash divider, makes a horizontal slashed line
+ * Usage:
+ * <hr class="divider divider-slash" />
+ */
+.divider-slash {
+    border: none;
+    height: 17.5px;
+    width: 100%;
+    position: relative;
+    overflow: hidden; }
+.divider-slash:after {
+    position: absolute;
+    top: -52px;
+    top: -3.25rem;
+    left: -52px;
+    left: -3.25rem;
+    display: block;
+    content: "//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////";
+    font-size: 66px;
+    font-size: 4.125rem;
+    color: #F2F3F3;
+    letter-spacing: -5px;
+    font-weight: 700; }
