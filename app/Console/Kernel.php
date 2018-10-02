@@ -2,7 +2,6 @@
 
 namespace App\Console;
 
-use App\Member;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -14,9 +13,9 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        Commands\checkBirthdays::class,
+        Commands\DeleteAllTexts::class
     ];
-
     /**
      * Define the application's command schedule.
      *
@@ -25,33 +24,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-//        $schedule->call(function () {
-//            $members = Member::all();
-//            foreach ($members as $member){
-//                $check = substr($member->birthday,0, -5);
-//                $month = date('m');
-//                $day = date('d');
-//                $now = $month."/".$day;
-//                if($now == $check){
-//                    $this->sendMessage($member);
-//                }
-//            }
-//        })->daily();
+        $schedule->call(function () {
+
+        });
     }
-//    public function sendMessage($person){
-//        $basic  = new \Nexmo\Client\Credentials\Basic(env("Nexmo_API_KEY"), env("Nexmo_API_SECRET"));
-//        $client = new \Nexmo\Client($basic);
-//
-//        $date = new \DateTime($person->birthday);
-//        $now = new \DateTime();
-//        $age = $now->diff($date);
-//
-//        $message = $client->message()->send([
-//            'to' => "12182805085",
-//            'from' => '12109619101',
-//            'text' => 'It is '.$person->name.'\'s birthday! He is Turning '.$age->y.'! Wish Him a Happy Birthday his phone number is: '.$person->phone_number
-//        ]);
-//    }
     /**
      * Register the commands for the application.
      *

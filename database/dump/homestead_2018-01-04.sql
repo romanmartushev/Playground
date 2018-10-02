@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.5.5-10.2.8-MariaDB-10.2.8+maria~jessie)
 # Database: homestead
-# Generation Time: 2017-12-29 18:43:53 +0000
+# Generation Time: 2018-01-04 15:43:44 +0000
 # ************************************************************
 
 
@@ -23,19 +23,17 @@
 # Dump of table members
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `members`;
-
 CREATE TABLE `members` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `age` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `birthday` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phone_number` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `parents` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `children` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `spouse` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 NOT NULL DEFAULT '',
+  `age` varchar(255) CHARACTER SET utf8mb4 NOT NULL DEFAULT '',
+  `birthday` varchar(255) CHARACTER SET utf8mb4 NOT NULL DEFAULT '',
+  `phone_number` varchar(255) CHARACTER SET utf8mb4 NOT NULL DEFAULT '',
+  `address` varchar(255) CHARACTER SET utf8mb4 NOT NULL DEFAULT '',
+  `email` varchar(255) CHARACTER SET utf8mb4 NOT NULL DEFAULT '',
+  `parents` varchar(255) CHARACTER SET utf8mb4 NOT NULL DEFAULT '',
+  `children` varchar(255) CHARACTER SET utf8mb4 NOT NULL DEFAULT '',
+  `spouse` varchar(255) CHARACTER SET utf8mb4 NOT NULL DEFAULT '',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -140,11 +138,9 @@ UNLOCK TABLES;
 # Dump of table migrations
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `migrations`;
-
 CREATE TABLE `migrations` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `migration` varchar(255) CHARACTER SET utf8mb4 NOT NULL DEFAULT '',
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -168,11 +164,9 @@ UNLOCK TABLES;
 # Dump of table password_resets
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `password_resets`;
-
 CREATE TABLE `password_resets` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 NOT NULL DEFAULT '',
+  `token` varchar(255) CHARACTER SET utf8mb4 NOT NULL DEFAULT '',
   `created_at` timestamp NULL DEFAULT NULL,
   KEY `password_resets_email_index` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -182,14 +176,12 @@ CREATE TABLE `password_resets` (
 # Dump of table users
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `users`;
-
 CREATE TABLE `users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(100) CHARACTER SET utf8mb4 NOT NULL DEFAULT '',
+  `email` varchar(100) CHARACTER SET utf8mb4 NOT NULL DEFAULT '',
+  `password` varchar(100) CHARACTER SET utf8mb4 NOT NULL DEFAULT '',
+  `remember_token` varchar(100) CHARACTER SET utf8mb4 DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),

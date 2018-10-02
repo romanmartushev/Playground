@@ -1,0 +1,1 @@
+{"version":3,"sources":["dark.scss"],"names":[],"mappings":"AAAA;EACE,0BAAyB;EACzB,eACF;CAAC;;AACD;EACE,aAAY;CACb","file":"dark.css","sourcesContent":[".body-dark{\n  background-color: #0f0f0f;\n  color: #0f0f0f\n}\n.white{\n  color: white;\n}"]}

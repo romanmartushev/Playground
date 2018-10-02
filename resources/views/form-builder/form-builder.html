@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Form [short-code] Builder</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<div class="text-center">
+    <h1>Form [short-code] Builder</h1>
+</div>
+<div class="container" id="app">
+    <div class="row justify-content-center" v-cloak>
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label>Tag</label>
+                <input type="text" class="form-control" id="form_tag" placeholder="Tag" v-model="tag">
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" class="form-control" id="form_name" placeholder="Name" v-model="name">
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label>New line</label>
+                <input type="text" class="form-control" id="new_line" placeholder="," v-model="new_line">
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label>Delimiter</label>
+                <input type="text" class="form-control" id="delimiter" placeholder="|" v-model="delimiter">
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <label>Submit Button:</label>
+            <input class="form-control" type="text" id="submit_button_name" placeholder="Submit Button Name" v-model="submit_button_name">
+        </div>
+    </div>
+    <div class="row justify-content-center" v-cloak>
+        <hr class="divider divider-slash" />
+        <div class="col-sm-12 txt-center">
+            <h1>Extras</h1>
+        </div>
+        <div class="col-sm-12" v-for="extra in extras">
+            <h2>{{extra.heading}}</h2>
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label>Heading:</label>
+                    <input type="text" class="form-control" :id="'form_heading_'+extra.heading" placeholder="Heading" v-model="extra.heading">
+                </div>
+                <div class="col-sm-6">
+                    <label>Value:</label>
+                    <input type="text" class="form-control" :id="'form_value_'+extra.heading" placeholder="Value" v-model="extra.value">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 text-right">
+            <h5>Add another attribute:</h5>
+            <a @click="RemoveExtraRow()"><i id="'remove_extra" class="fas fa-minus-square" aria-hidden="true"></i></a>
+            <a @click="AddExtraRow()"><i id="'add_extra" class="fas fa-plus-square" aria-hidden="true"></i></a>
+        </div>
+    </div>
+    <div class="row mt-2" v-for="attribute in attributes">
+        <hr class="divider divider-slash" />
+        <div class="col-sm-12 txt-center">
+            <h1>{{attribute.heading.toUpperCase()}}</h1>
+        </div>
+        <div class="col-sm-6">
+            <label>Heading:</label>
+            <input class="form-control" type="text" :id="'attribute_label_'+attribute.heading" placeholder="Field Label" v-model="attribute.heading">
+        </div>
+        <div class="col-sm-12 mt-3">
+            <div class="row" v-for="field in attribute.fields">
+                <div class="col-sm-12">
+                    <h2>{{field.label}} Field:</h2>
+                </div>
+                <div class="col-sm-6">
+                    <label>Label:</label>
+                    <input class="form-control" type="text" :id="'field_label_'+field.label" placeholder="Field Label" v-model="field.label">
+                </div>
+                <div class="col-sm-6">
+                    <label>Name:</label>
+                    <input class="form-control" type="text" :id="'field_name_'+field.label" placeholder="Field Name" v-model="field.name">
+                </div>
+                <div class="col-sm-6">
+                    <label>Type:</label>
+                    <input class="form-control" type="text" :id="'field_type_'+field.label" placeholder="Field Type" v-model="field.type">
+                </div>
+                <div class="col-sm-6">
+                    <label>Value:</label>
+                    <input class="form-control" type="text" :id="'field_value'+field.label" placeholder="Field Value" v-model="field.value">
+                </div>
+                <div class="col-sm-6">
+                    <label>Comment:</label>
+                    <input class="form-control" type="text" :id="'field_comment'+field.label" placeholder="Field Comment" v-model="field.comment">
+                </div>
+            </div>
+            <div class="col-sm-12 text-right">
+                <h5>Add another field:</h5>
+                <a @click="RemoveFieldFromAttribute(attribute)"><i :id="'remove_field_from_attribute'+attribute.id" class="fas fa-minus-square" aria-hidden="true"></i></a>
+                <a @click="AddFieldToAttribute(attribute)"><i :id="'add_field_to_attribute'+attribute.id" class="fas fa-plus-square" aria-hidden="true"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 text-right">
+            <hr class="divider divider-slash"/>
+            <h5>Add another attribute:</h5>
+            <a @click="RemoveAttributeRow()"><i id="'remove_attribute" class="fas fa-minus-square" aria-hidden="true"></i></a>
+            <a @click="AddAttributeRow()"><i id="'add_attribute" class="fas fa-plus-square" aria-hidden="true"></i></a>
+        </div>
+    </div>
+    <!--------------------------------------------------------------------------------------------------------------->
+    <div class="row mb-5">
+        <div class="col-sm-10">
+            {{ short_code }}
+        </div>
+        <div class="col-sm-2">
+            <button class="btn btn-dark" @click="copyShortcode()">
+                <i class="fas fa-copy">Copy</i>
+            </button>
+        </div>
+        <input type="hidden" id="short_code" :value="short_code">
+    </div>
+    <div class="row mb-5">
+        <div class="col-sm-10">
+            <div class="form-group">
+                <label for="imported-short-code"><strong>Import an existing [short-code] to populate fields:</strong></label>
+                <textarea class="form-control" id="imported-short-code" rows="4" v-model="imported_short_code"></textarea>
+            </div>
+            <button class="btn btn-dark" @click="populateFields()">Import</button>
+        </div>
+    </div>
+    <div class="row mb-5">
+        <div class="col-sm-10">
+            <div v-if="error !== ''" class="alert alert-danger" v-cloak>
+                {{error}}
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="../assets/js/form-builder.js"></script>
+</body>
+</html>

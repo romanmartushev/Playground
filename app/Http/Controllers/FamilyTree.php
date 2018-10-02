@@ -7,8 +7,11 @@ use Illuminate\Http\Request;
 
 class FamilyTree extends Controller
 {
+    /**
+     * allows for the viewing of the family tree
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function viewTree(){
-
         $spouses = $this->Spouses();
         $families = $this->Children($spouses);
         for($i=0;$i<count($families);$i++){
@@ -24,34 +27,14 @@ class FamilyTree extends Controller
                 unset($families[$index]);
             }
         }
-        $members = Member::all();
-        foreach ($members as $member){
-            $check = substr($member->birthday,0, -5);
-            $month = date('m');
-            $day = date('d');
-            $now = $month."/".$day;
-            if($now == $check){
-                $this->sendMessage($member);
-            }
-        }
         $families = array_values($families);
         return view('mainFamilyTree')->with('families',$families);
     }
-    public function sendMessage($person){
-        $basic  = new \Nexmo\Client\Credentials\Basic(env("Nexmo_API_KEY"), env("Nexmo_API_SECRET"));
-        $client = new \Nexmo\Client($basic);
 
-        $date = new \DateTime($person->birthday);
-        $now = new \DateTime();
-        $age = $now->diff($date);
-
-        $message = $client->message()->send([
-            'to' => "12182805085",
-            'from' => '12109619101',
-            'text' => 'It is '.$person->name.'\'s birthday! He is turning '.$age->y.'! Wish him a Happy Birthday his phone number is: '.$person->phone_number
-        ]);
-    }
-
+    /**
+     * Foreach member find if they have a spouse
+     * @return array
+     */
     protected function Spouses(){
         $members = Member::all();
         $memToArray = $members->toArray();
@@ -85,6 +68,11 @@ class FamilyTree extends Controller
         return $spouses;
     }
 
+    /**
+     * Foreach couple find if they have children
+     * @param $spouses
+     * @return mixed
+     */
     protected function Children($spouses){
         $i=0;
         $members = Member::all();
@@ -106,13 +94,19 @@ class FamilyTree extends Controller
         return $spouses;
     }
 
-    public function startCreate()
-    {
+    /**
+     * display the form for creating a new family member
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function startCreate(){
         return view('addFamilyTree');
     }
 
-    public function startUpdate()
-    {
+    /**
+     * used for returning the update page with all family members
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function startUpdate(){
         $members = Member::all();
         $members = $members->toArray();
         $sort_col = array();
@@ -125,28 +119,39 @@ class FamilyTree extends Controller
 
     }
 
-    public function createMember(Request $request)
-    {
-        if($request->name != "" && $request->birthday != ""){
-            if($member = Member::where(['name' => $request->name, 'birthday' => $request->birthday])->first()){
-                return redirect('/add-member')->with('error','Family Member Already Exists!');
+    /**
+     * creates a new family member
+     * @param Request $request
+     * @return array
+     */
+    public function createMember(Request $request){
+        if($request->input("name") != "" && $request->input("birthday") != ""){
+            if($member = Member::where(['name' => $request->input("name"), 'birthday' => $request->input("birthday")])->first()){
+                return $response = ['error' => 'Family Member Already Exists!'];
             }
-            $member = new Member();
-            $date = new \DateTime($request->birthday);
+            $date = new \DateTime($request->input("birthday"));
             $now = new \DateTime();
             $age = $now->diff($date);
-            $member->age = $age->y;
-            $member->name = $request->name;
-            $member->birthday = $request->birthday;
-            $member->phone_number = $request->phoneNumber;
-            $member->email = $request->email;
+            $member = new Member([
+                "age" => $age->y,
+                "name" => $request->input("name"),
+                "birthday" => $request->input("birthday"),
+                "phone_number" => $request->input("phoneNumber"),
+                "email" => $request->input("email")
+            ]);
             $member->save();
-            return redirect('/add-member')->with('success','Family Member Successfully Added!');
+            return $response = ['success' =>'Family Member Successfully Added!'];
         }
 
-        return redirect('/add-member')->with('error','Name and Birthday Fields must be Filled');
+        return $response = ['error' => 'Name and Birthday Fields must be Filled'];
 
     }
+
+    /**
+     * Updates a member
+     * @param Request $request
+     * @return array
+     */
     public function updateMember(Request $request){
         $members = Member::all();
         $members = $members->toArray();
@@ -156,30 +161,44 @@ class FamilyTree extends Controller
         }
         array_multisort($sort_col, SORT_ASC, $members);
 
-        $memberNameBirthDay = explode('Birthday:',$request->name);
-        $motherNameBirthDay = explode('Birthday:',$request->mother);
-        $fatherNameBirthDay = explode('Birthday:',$request->father);
-        $spouseNameBirthDay = explode('Birthday:',$request->spouse);
-        if($memberNameBirthDay[0] != "default") {
+        $memberNameBirthDay = explode('Birthday:',$request->input("name"));
+        $motherNameBirthDay = explode('Birthday:',$request->input("mother"));
+        $fatherNameBirthDay = explode('Birthday:',$request->input("father"));
+        $spouseNameBirthDay = explode('Birthday:',$request->input("spouse"));
+        if($memberNameBirthDay[0] != "default"){
             $memberNameBirthDay[0] = trim($memberNameBirthDay[0]);
             $memberNameBirthDay[1] = trim($memberNameBirthDay[1]);
             $member = Member::where(['name' => $memberNameBirthDay[0], 'birthday' => $memberNameBirthDay[1]])->first();
             if($member){
                 if($motherNameBirthDay[0] != "default"){
-                    $motherNameBirthDay[0] = trim($motherNameBirthDay[0]);
-                    $motherNameBirthDay[1] = trim($motherNameBirthDay[1]);
-                    $mother = Member::where(['name' => $motherNameBirthDay[0],'birthday' => $motherNameBirthDay[1]])->first();
+                    if($member->parents == "") {
+                        $motherNameBirthDay[0] = trim($motherNameBirthDay[0]);
+                        $motherNameBirthDay[1] = trim($motherNameBirthDay[1]);
+                        $mother = Member::where(['name' => $motherNameBirthDay[0], 'birthday' => $motherNameBirthDay[1]])->first();
 
-                    $mother->children = $mother->children .' '. $member->id;
-                    $mother->save();
+                        $mother->children = $mother->children . ' ' . $member->id;
+                        $mother->save();
+                    }else{
+                        $parents = explode(" ",$member->parents);
+                        $father = Member::where('id',$parents[0])->first();
+                        $mother = Member::where('id',$parents[1])->first();
+                        return $response = ['error' => 'Family Member Already Has Parents: '.$father->name.' And '.$mother->name];
+                    }
                 }
                 if($fatherNameBirthDay[0] != "default"){
-                    $fatherNameBirthDay[0] = trim($fatherNameBirthDay[0]);
-                    $fatherNameBirthDay[1] = trim($fatherNameBirthDay[1]);
-                    $father = Member::where(['name' => $fatherNameBirthDay[0], 'birthday' => $fatherNameBirthDay[1]])->first();
+                    if($member->parents == "") {
+                        $fatherNameBirthDay[0] = trim($fatherNameBirthDay[0]);
+                        $fatherNameBirthDay[1] = trim($fatherNameBirthDay[1]);
+                        $father = Member::where(['name' => $fatherNameBirthDay[0], 'birthday' => $fatherNameBirthDay[1]])->first();
 
-                    $father->children = $father->children . ' ' . $member->id;
-                    $father->save();
+                        $father->children = $father->children . ' ' . $member->id;
+                        $father->save();
+                    }else{
+                        $parents = explode(" ",$member->parents);
+                        $father = Member::where('id',$parents[0])->first();
+                        $mother = Member::where('id',$parents[1])->first();
+                        return $response = ['error' => 'Family Member Already Has Parents: '.$father->name.' And '.$mother->name];
+                    }
                 }
                 if($spouseNameBirthDay[0] != "default"){
                     if($member->spouse == ""){
@@ -193,14 +212,60 @@ class FamilyTree extends Controller
                     }
                     else{
                         $spouse = Member::where('id',$member->spouse)->first();
-                        return redirect('/update-member')->with('members',$members)->with('error','Family Member Already Has A Spouse: '.$spouse->name.' '.$spouse->birthday);
+                        return $response = ['error'=>'Family Member Already Has A Spouse: '.$spouse->name.' '.$spouse->birthday];
                     }
                 }
-                return redirect('/update-member')->with('members',$members)->with('success','Family Member Successfully Updated!');
+                if($request->input("phoneNumber") != ''){
+                    $member->phone_number = $request->input("phoneNumber");
+                    $member->save();
+                }
+                if($request->input("address") != ''){
+                    $member->address = $request->input("address");
+                    $member->save();
+                }
+                if($request->input("email") != ''){
+                    $member->email = $request->input("email");
+                    $member->save();
+                }
+                return $response = ['success' => 'Family Member Successfully Updated!'];
             }else{
-                return redirect('/update-member')->with('members',$members)->with('error','A Family Member Must Be Entered!');
+                return $response = ['error' => 'A Family Member Must Be Entered!'];
             }
         }
-        return redirect('/update-member')->with('members',$members)->with('error','A Family Member Must Be Entered!');
+        return $response = ['error' => 'A Family Member Must Be Entered!'];
+    }
+
+    /**
+     * Checks to see if there is a birthday today
+     * @return array
+     */
+    public function getBirthdays(){
+        $members = Member::all();
+        $birthdays =[];
+        foreach ($members as $member){
+            $check = substr($member->birthday,0, -5);
+            $age = $this->getAge($member);
+            $member->age = $age;
+            $member->save();
+            $month = date('m');
+            $day = date('d');
+            $now = $month."/".$day;
+            if($now == $check){
+                array_push($birthdays,$member->toArray());
+            }
+        }
+        return $birthdays;
+    }
+
+    /**
+     * Gets the age for a member
+     * @param $member
+     * @return int
+     */
+    public function getAge($member){
+        $date = new \DateTime($member->birthday);
+        $now = new \DateTime();
+        $age = $now->diff($date);
+        return $age->y;
     }
 }

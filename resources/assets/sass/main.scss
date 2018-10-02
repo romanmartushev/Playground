@@ -37,7 +37,6 @@ body{
   height:150px;
 }
 .center-block{
-  display: table;
   margin-left: auto;
   margin-right: auto;
 }
@@ -47,6 +46,12 @@ body{
 }
 .circle-margin{
   margin-top: 35px;
+}
+.relative{
+  position: relative;
+}
+.absolute{
+  position: absolute;
 }
 .special-bullets{
   li {
@@ -69,7 +74,6 @@ body{
   box-shadow: 8px 8px 10px #aaa;
   background-repeat: no-repeat;
   background-size: cover;
-  max-width: 1330px;
   background-position: top;
 }
 .tree-1{
@@ -79,4 +83,32 @@ body{
   background-size: cover;
   background-position: bottom;
   max-width: 1330px;
+}
+.leaf{
+  background-image: url("/Images/leaf.png");
+  background-size: cover;
+  background-position: center;
+}
+.nav-pills > li > a{
+  color: white;
+  font-size: 10pt;
+}
+.nav-pills > li > a:hover{
+  background-color:green;
+}
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+  color:white;
+  background-color: green;
+}
+.code-background{
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("/Images/jquery.png");
+}
+.underline{
+  text-decoration: underline;
+}
+.shadow{
+  text-shadow: 2px 2px 4px #000;
+}
+.box-shadow{
+  box-shadow: 8px 8px 10px #aaa;
 }

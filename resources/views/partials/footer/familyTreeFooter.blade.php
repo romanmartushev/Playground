@@ -1,12 +1,12 @@
-<div class="tree-roots margin-top-lg margin-left-auto margin-right-auto margin-bottom-lg">
+<div class="tree-roots container margin-top-lg margin-bottom-lg">
     <div class="row">
-        <div class="col-md-6 txt-white">
+        <div class="col-sm-6 txt-white">
             <div class="padding-xs">
                 <h5 class="title">THE FAMILY TREE PROJECT</h5>
-                <p>This is a testing environment and the beginning of a project to display a family tree</p>
+                <p>Here you can view the Ivanov family tree</p>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-sm-6">
             <h5 class="title txt-white">Links</h5>
             <ul class="special-bullets">
                 <li><a class="txt-white" href="/">Return To Homepage</a></li>
