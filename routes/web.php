@@ -22,18 +22,6 @@ Route::get('/', function () {
 Route::get('/dark', function () {
     return view('dark/index');
 });
-/**
- * Routes for family tree project
- */
-Route::get('/homepage-birthdays','FamilyTree@getBirthdays');
-
-Route::get('/family-tree','FamilyTree@viewTree');
-
-Route::get('/add-member', 'FamilyTree@startCreate');
-Route::get('/add-new-member','FamilyTree@createMember');
-
-Route::get('/update-member', 'FamilyTree@startUpdate');
-Route::get('/update-a-member','FamilyTree@updateMember');
 
 /**
  * Routes for text message app (windows app)

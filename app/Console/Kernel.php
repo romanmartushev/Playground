@@ -13,7 +13,6 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        Commands\checkBirthdays::class,
         Commands\DeleteAllTexts::class
     ];
     /**

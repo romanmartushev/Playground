@@ -5,7 +5,6 @@ new Vue({
     el:'#root',
     data:{
         errors: [],
-        birthdays: [],
         welcome_message: 'Hello',
         timeout: 1000
     },
@@ -28,18 +27,8 @@ new Vue({
             },timeout);
             this.timeout += 100;
         },
-        checkBirthdays: function(){
-            const vm = this;
-            axios.get("/homepage-birthdays")
-                .then(function (response) {
-                    vm.birthdays = response.data;
-                }).catch(function(e) {
-                    vm.errors.push(e);
-            });
-        }
     },
     mounted: function(){
         this.welcome();
-        this.checkBirthdays();
     }
 });

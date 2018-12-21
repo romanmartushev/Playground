@@ -27,19 +27,9 @@ new Vue({
                 vm.welcome_message = vm.welcome_message + letter;
             },timeout);
             this.timeout += 100;
-        },
-        checkBirthdays: function(){
-            const vm = this;
-            axios.get("/homepage-birthdays")
-                .then(function (response) {
-                    vm.birthdays = response.data;
-                }).catch(function(e) {
-                vm.errors.push(e);
-            });
         }
     },
     mounted: function(){
         this.welcome();
-        this.checkBirthdays();
     }
 });

@@ -20,12 +20,12 @@ class NexmoAPIController extends Controller
     public function sendText(Request $request){
 
         if($request->has('message') && $request->has('number')) {
-            if ($request->has('secret') && $request->input('secret') == env("Nexmo_API_SECRET")) {
-                if ($request->has("key") && $request->input("key") == env("Nexmo_API_KEY")) {
+            if ($request->has('secret') && $request->input('secret') == env("NEXMO_API_SECRET")) {
+                if ($request->has("key") && $request->input("key") == env("NEXMO_API_KEY")) {
                     //http://myfamily.pbndev.net/api/sendText?message=hello&number=12182805085&key=$key&secret=$secret
                     $message = $request->input('message');
                     $number = $request->input('number');
-                    $basic  = new Basic(env("Nexmo_API_KEY"), env("Nexmo_API_SECRET"));
+                    $basic  = new Basic(env("NEXMO_API_KEY"), env("NEXMO_API_SECRET"));
                     $client = new Client($basic);
                     $response = $client->message()->send([
                         'to' => $number,
@@ -44,8 +44,8 @@ class NexmoAPIController extends Controller
     public function getText(Request $request)
     {
         if ($request->has('number')) {
-            if ($request->has('secret') && $request->input('secret') == env("Nexmo_API_SECRET")) {
-                if ($request->has("key") && $request->input("key") == env("Nexmo_API_KEY")) {
+            if ($request->has('secret') && $request->input('secret') == env("NEXMO_API_SECRET")) {
+                if ($request->has("key") && $request->input("key") == env("NEXMO_API_KEY")) {
                     //http://myfamily.pbndev.net/api/getText?number=12182805085&key=$key&secret=$secret
                     $response = Text::where("msisdn", $request->input('number'))->first();
                     if($response)
@@ -60,8 +60,8 @@ class NexmoAPIController extends Controller
     public function deleteText(Request $request)
     {
         if ($request->has('messageID')) {
-            if ($request->has('secret') && $request->input('secret') == env("Nexmo_API_SECRET")) {
-                if ($request->has("key") && $request->input("key") == env("Nexmo_API_KEY")) {
+            if ($request->has('secret') && $request->input('secret') == env("NEXMO_API_SECRET")) {
+                if ($request->has("key") && $request->input("key") == env("NEXMO_API_KEY")) {
                     //http://myfamily.pbndev.net/api/deleteText?messageID=1&key=$key&secret=$secret
                     Text::where("id", $request->input('messageID'))->delete();
                 }

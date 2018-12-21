@@ -15,17 +15,8 @@
             <div class="col-sm-12 text-center txt-white" style="background-color: #999999">
                 <h1>@{{ welcome_message }}</h1>
             </div>
-            <div class="col-sm-12" style="background-color: #5e5e5e;">
-                <ul v-if="birthdays.length > 0" class="txt-white special-bullets mt-3">
-                    <li v-for="person in birthdays" class="shadow">@{{person['name']}} turned @{{person['age']}} today!</li>
-                </ul>
-                <ul v-else class="txt-white special-bullets mt-3">
-                    <li class="shadow">No Birthdays today!</li>
-                </ul>
-            </div>
         </div>
     </div>
-    @include('partials/footer/familyTreeFooter')
     @include('partials/footer/additionalFooter')
     <script src="/js/jquery.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
